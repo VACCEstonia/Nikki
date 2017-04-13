@@ -8,4 +8,4 @@ Discord Bot
     <li>BeautifulSoup 4</li>
   </ul>
   
-Run commandline example: <i>nohup python3.5 main.py > /dev/null 2>main.log</i>
+Run commandline example: <i>nohup python3.5 main.py > /dev/null 2>main.log &</i>
