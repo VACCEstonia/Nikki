@@ -1,8 +1,8 @@
 # Nikki
 Discord Bot
 
-Requirements:
-  Python 3.4+
-  Discord python module
-  BeautifulSoup 4
+Requirements:<br>
+  Python 3.4+<br>
+  Discord python module<br>
+  BeautifulSoup 4<br>
   
