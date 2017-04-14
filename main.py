@@ -34,11 +34,11 @@ async def on_message(message):
                     break
         msg = ""
         if result == "USER_DUPLICATE":
-            msg = "{0.author.mention}, I can't register this VATSIM id. Contact Community admins in Private Messages! \U0001f626 ".format(
+            msg = "{0.author.mention}, I can't register this VATSIM CID. Contact staff in private message \U0001f626 ".format(
                 message)
             await client.send_message(message.channel, msg)
         elif result == "INVALID_CID":
-            msg = "{0.author.mention}, you provided me invalid VATSIM id \U0001f626. Waiting for valid VATSIM id. (If you don't have VATSIM ID contact Community admins in Private Messages). ".format(
+            msg = "{0.author.mention}, you provided me invalid VATSIM CID \U0001f626. waiting for valid VATSIM CID. (If you don't have VATSIM CID contact staff in private message). ".format(
                 message)
             await client.send_message(message.channel, msg)
         elif result == "OK":
@@ -46,7 +46,7 @@ async def on_message(message):
             msg = "There is new user {0.author.mention} on our server. Have a nice day! \U0001f603".format(message)
             await client.change_nickname(message.author, name)
             await client.add_roles(message.author, client.get_server(DISCORD_SERVER).roles[1])
-            await client.send_message(client.get_channel(CNL_VACCUA), msg)
+            await client.send_message(client.get_channel(CNL_ESTVACC), msg)
             await client.send_message(client.get_channel(CNL_TEST),
                                       'I have just added a user DiscordID: ' + message.author.mention + ' with VatsimID: ' + num)
 
@@ -107,7 +107,7 @@ async def on_message(message):
             params = message.content.split(' ')
             apt = str(params[1]).upper()
             if len(params) != 2 or len(apt) != 4:
-                await client.send_message(message.channel, 'Invalid using of !metar.\nExample: !metar UKBB')
+                await client.send_message(message.channel, 'Invalid using of !metar.\nExample: !metar EETN')
             else:
                 metar = getmetar.extract_metar(apt)
                 if metar:
@@ -121,7 +121,7 @@ async def on_message(message):
             params = message.content.split(' ')
             apt = str(params[1]).upper()
             if len(params) != 2 or len(apt) != 4:
-                await client.send_message(message.channel, 'Invalid using of !taf.\nExample: !taf UKBB')
+                await client.send_message(message.channel, 'Invalid using of !taf.\nExample: !taf EETN')
             else:
                 taf = getmetar.extract_metar(apt, "taf")
                 if taf:
@@ -135,7 +135,7 @@ async def on_message(message):
             params = message.content.split(' ')
             apt = str(params[1]).upper()
             if len(params) != 2 or len(apt) != 4:
-                await client.send_message(message.channel, 'Invalid using of !taf.\nExample: !metaf UKBB')
+                await client.send_message(message.channel, 'Invalid using of !taf.\nExample: !metaf EETN')
             else:
                 metaf = getmetar.extract_metar(apt, "all")
                 if metaf:
@@ -147,9 +147,9 @@ async def on_message(message):
 
         if message.content == '!help':
             await client.send_message(message.channel, 'Commands accepted by bot: \n'
-                                                       '!metar UKBB - provides METAR for airport\n'
-                                                       '!taf UKBB - provides TAF for airport\n'
-                                                       '!metaf UKBB - provides both METAR and TAF for airport\n'
+                                                       '!metar EETN - provides METAR for airport\n'
+                                                       '!taf EETN - provides TAF for airport\n'
+                                                       '!metaf EETN - provides both METAR and TAF for airport\n'
                                                        '!reglist - gives registered users list (admin only)\n'
                                                        '!reg @Mention vatsimid - register user in db (admin only)\n')
 
