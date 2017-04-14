@@ -6,14 +6,14 @@ import getmetar
 
 import nikkidb
 
-DISCORD_SERVER = '234637141135589376'
+DISCORD_SERVER = '234637141135589376'		# VACC Estonia Discord
 
-CNL_TEST = '302537590047899658'
-CNL_REQUESTS = '302536983505534997'
-CNL_ESTVACC = '234637141135589376'
-CNL_NIKKI = '302536111782101002'
+CNL_TEST = '302537590047899658'				# #oom
+CNL_REQUESTS = '302536983505534997'			# #requests
+CNL_ESTVACC = '234637141135589376'			# #estvacc
+CNL_NIKKI = '302536111782101002'			# #nikki
 
-I_AM_NIKKI = 'INSERT MANUALLY'
+I_AM_NIKKI = ''		# Token from API
 
 client = discord.Client()
 
@@ -38,21 +38,21 @@ async def on_message(message):
                 message)
             await client.send_message(message.channel, msg)
         elif result == "INVALID_CID":
-            msg = "{0.author.mention}, you provided me invalid VATSIM CID \U0001f626. waiting for valid VATSIM CID. (If you don't have VATSIM CID contact staff in private message). ".format(
+            msg = "{0.author.mention}, you provided me with invalid VATSIM CID \U0001f626, waiting for valid VATSIM CID. (If you don't have VATSIM CID contact staff in private message). ".format(
                 message)
             await client.send_message(message.channel, msg)
         elif result == "OK":
             name = nikkidb.insert(message.author.id, num)
-            msg = "There is new user {0.author.mention} on our server. Have a nice day! \U0001f603".format(message)
+            msg = "There is new user {0.author.mention} on our server. Welcome! Have a nice day :) \U0001f603".format(message)
             await client.change_nickname(message.author, name)
             await client.add_roles(message.author, client.get_server(DISCORD_SERVER).roles[1])
             await client.send_message(client.get_channel(CNL_ESTVACC), msg)
             await client.send_message(client.get_channel(CNL_TEST),
-                                      'I have just added a user DiscordID: ' + message.author.mention + ' with VatsimID: ' + num)
+                                      'I have just added a user Discord UserID: ' + message.author.mention + ' with VATSIM CID: ' + num)
 
     if message.channel.id == CNL_NIKKI:
         if message.content.startswith('!reg '):
-            role = discord.utils.get(client.get_server(DISCORD_SERVER).roles, name="Community admins")
+            role = discord.utils.get(client.get_server(DISCORD_SERVER).roles, name="staff")
             if role in message.author.roles:
                 params = message.content.split(' ')
                 if len(params) == 3 and len(message.mentions) == 1:
@@ -64,9 +64,9 @@ async def on_message(message):
                         name = nikkidb.insert(message.mentions[0].id, vatsimID)
                         await client.change_nickname(message.mentions[0], name)
                         await client.send_message(client.get_channel(CNL_NIKKI),
-                                                  'I have just added a user ' + member.mention + ' with VatsimID: ' + vatsimID)
+                                                  'I have just added a user ' + member.mention + ' with VATSIM CID: ' + vatsimID)
                     elif result == "INVALID_CID":
-                        msg = "{0.author.mention}, invalid VATSIM ID".format(message)
+                        msg = "{0.author.mention}, invalid VATSIM CID".format(message)
                         await client.send_message(message.channel, msg)
                     elif result == "USER_DUPLICATE":
                         msg = "{0.author.mention}, user is already in DB!".format(message)
@@ -79,7 +79,7 @@ async def on_message(message):
                                               message))
 
         if message.content == '!reglist':
-            role = discord.utils.get(client.get_server(DISCORD_SERVER).roles, name="Community admins")
+            role = discord.utils.get(client.get_server(DISCORD_SERVER).roles, name="staff")
             if role in message.author.roles:
                 answer = nikkidb.get_reg_list()
                 reg_list = ''
@@ -146,7 +146,7 @@ async def on_message(message):
                                                                                                        apt))
 
         if message.content == '!help':
-            await client.send_message(message.channel, 'Commands accepted by bot: \n'
+            await client.send_message(message.channel, 'Commands accepted by #nikki, the bot: \n'
                                                        '!metar EETN - provides METAR for airport\n'
                                                        '!taf EETN - provides TAF for airport\n'
                                                        '!metaf EETN - provides both METAR and TAF for airport\n'
@@ -160,7 +160,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.send_message(client.get_channel(CNL_TEST), "I'm ready")
+    await client.send_message(client.get_channel(CNL_TEST), "I'm ready and working")
 
 
 async def check_online():
