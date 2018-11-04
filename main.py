@@ -13,7 +13,7 @@ CNL_REQUESTS = '302536983505534997'			# #requests
 CNL_ESTVACC = '234637141135589376'			# #estvacc
 CNL_NIKKI = '302536111782101002'			# #nikki
 
-I_AM_NIKKI = ''		# Token from API
+I_AM_NIKKI = 'MzAyNTM0OTE2MTk1ODc2ODc0.C9LOxQ.YgWL6s_aDbsnJSWxssReYDbylFI'		# Token from API
 
 client = discord.Client()
 
