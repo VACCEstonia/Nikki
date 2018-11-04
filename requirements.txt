@@ -1,4 +1,2 @@
-heroku buildpacks:set heroku/python
-
 discord.py
 beautifulsoup4
