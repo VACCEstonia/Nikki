@@ -1,1 +1,1 @@
-web: python3.6 main.py
+release: python3.6 main.py
