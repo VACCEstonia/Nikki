@@ -1,2 +1,6 @@
+asyncio
+discord
+requests
 discord.py
 beautifulsoup4
+beautifulsoup4-slurp
